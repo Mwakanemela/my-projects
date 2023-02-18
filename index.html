@@ -49,7 +49,17 @@ div.gallery {
   float: left;
   width: 180px;
   transition: 3s;
+  animation-name: example;
+  animation-duration: 4s;
+  position:relative;
 }
+
+@keyframes example {
+  0%   { left:0px; top:0px;}
+  25%  {left:200px; top:0px;}
+  100% {left:0px; top:0px;}
+}
+
 div.gallery:hover {
 transform: rotate(10deg);
 }
