@@ -1,0 +1,30 @@
+{
+	"meshos": [
+		{
+			"name" : "Timothy Bongololo",
+			"year"  :"2019",
+			"Professional": "Software Engineer and Many More..."
+ 		},
+		
+	
+		{
+			"name" : "Wilton Banda",
+			"year"  :"2019",
+			"Professional": "Software Engineer and Many More..."
+ 		},
+		
+		
+		{
+			"name" : "Taonga Kanyenda",
+			"year"  :"2019",
+			"Professional": "Software Engineer and Many More..."
+ 		},
+		
+		{
+			"name" : "Mwakanemela Kayange",
+			"year"  :"2019",
+			"Professional": "Software Engineer and Many More..."
+ 		}
+		
+	]
+}

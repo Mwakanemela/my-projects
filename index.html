@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My Meshoz Project </title>
+		<style>
+			body {
+				background:#f4f4f4;
+				
+			}
+			h1 {
+				text-align:center;
+				font-size:3em;
+				text-shadow: 2px 2px 4px black;
+			}
+			
+			li 
+			{
+				list-style-type:none;
+				padding-left:5px;
+			}
+			
+			#container 
+			{
+				width:600px;
+				margin:80px auto;
+				overflow:hidden;
+				border:2px #666 dashed;
+				min-height: 300px;
+				padding:30px;
+				box-shadow: 0 24px 8px 0 rgba(0, 0, 0, 0.2), 20px 6px 20px 0 rgba(0, 0, 0, 0.19);
+				transition: 3s;
+				transform: rotate(10deg);
+			}
+			#container:hover
+			{
+				transform: rotate(0deg);
+			}
+			#movie_select
+			{
+				width:100%;
+				padding:20px;
+				font-size:2em;
+			}
+			
+			
+div.gallery {
+  margin:0 50px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+  transition: 3s;
+}
+div.gallery:hover {
+transform: rotate(10deg);
+}
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+		</style>
+		<script>
+			function getMovieTitles()
+			{
+				var xmlhttp;
+				if(window.XMLHttpRequest)
+				{
+					//this is for all modern browser
+					xmlhttp = new XMLHttpRequest();
+				}
+				else 
+				{
+					//<=IE6 (old browsers)
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				
+				//check is is set
+				xmlhttp.onreadystatechange=function()
+				{
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+					{
+						jsondata = JSON.parse(xmlhttp.responseText);
+						var meshos = jsondata.meshos;
+						var output = '<form>';
+						output += '<select id = "movie_select" onchange = "movieSelect()">';
+						
+						for(i = 0; i < meshos.length; i++)
+						{
+							output += '<option value ="'+i+'">'+meshos[i].name+' </option>';
+						}
+						
+						output += '</select>';
+						output += '</form>';
+						
+						document.getElementById('movie_title').innerHTML = output;
+					}
+				}
+				
+				//get data 
+				xmlhttp.open("GET", "meshos.json", true);
+				xmlhttp.send();
+			}
+			
+			function movieSelect()
+			{
+				var selectBox = document.getElementById("movie_select");
+				var movieIndex = selectBox.options[selectBox.selectedIndex].value;
+				getMovieInfo(movieIndex);
+			}
+			
+			function getMovieInfo(i)
+			{
+				var xmlhttp;
+				if(window.XMLHttpRequest)
+				{
+					//this is for all modern browser
+					xmlhttp = new XMLHttpRequest();
+				}
+				else 
+				{
+					//<=IE6 (old browsers)
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				
+				//check is is set
+				xmlhttp.onreadystatechange=function()
+				{
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
+					{
+						jsondata = JSON.parse(xmlhttp.responseText);
+						var meshos = jsondata.meshos;
+						var output = '';
+						output += '<li class = "img"></li>';
+						output += '<li>Since : '+ meshos[i].year+'</li>';
+						output += '<li>Professional : '+ meshos[i].Professional+'</li>';
+						
+						document.getElementById('movie_info').innerHTML = output;
+					}
+					
+				}
+				
+				//get data 
+				xmlhttp.open("GET", "meshos.json", true);
+				xmlhttp.send();
+			}
+		</script>
+	</head>
+	<body onload = "getMovieTitles()">
+		<div id="container">
+			<h1>My Meshoz Project</h1>
+			<div id="movie_title"></div>
+			<br/>
+			<div id="movie_info"></div>
+		</div>
+		
+		<div class="gallery">
+			  <a target="_blank" href="img/tgk.jpg">
+				<img src="img/tgk.jpg" alt="TGK" width="600" height="400">
+			  </a>
+			  <div class="desc">Taonga Grant Kanyenda (TGK)</div>
+			</div>
+
+			<div class="gallery">
+			  <a target="_blank" href="img/wilton.jpg">
+				<img src="img/wilton.jpg" alt="Wilton" width="600" height="400">
+			  </a>
+			  <div class="desc">Wilton Banda</div>
+			</div>
+
+			<div class="gallery">
+			  <a target="_blank" href="img/timo.jpg">
+				<img src="img/timo.jpg" alt="Timothy" width="600" height="400">
+			  </a>
+			  <div class="desc">Timothy Bongololo</div>
+			</div>
+
+			<div class="gallery">
+			  <a target="_blank" href="img/mwaka.jpg">
+				<img src="img/mwaka.jpg" alt="Mountains" width="600" height="400">
+			  </a>
+			  <div class="desc">Mwakanemela Kayange</div>
+		</div>
+
+	</body>
+</html>
